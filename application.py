@@ -1,26 +1,31 @@
-import os.path, requests, json, sys
-from flask import Flask, request, redirect, jsonify, render_template
+import os.path
+import requests
+import json
+from flask import Flask, request, render_template
 app = Flask(__name__)
+
 
 class Class(object):
     def __init__(self, name, buildingNumber):
         self.name = name
         self.buildingNumber = buildingNumber
 
+
 def strip_data(data):
     finalDict = dict()
     for i in data:
         element = data[i][0]
         bNum = element["metadata"]["buildingNum"]
-        if bNum == None or element["campusID"] != 0:
+        if bNum is None or element["campusID"] != 0:
             continue
         else:
             finalDict[bNum] = {
-            "title": element["title"],
-            "latitude": element["latitude"],
-            "longitude": element["longitude"]
+                    "title": element["title"],
+                    "latitude": element["latitude"],
+                    "longitude": element["longitude"]
             }
     return finalDict
+
 
 def fetch_data():
     if not os.path.isfile("location.cache"):
@@ -31,26 +36,26 @@ def fetch_data():
         locationFile.close()
 
     # Read from file now
-
     locationFile = open("location.cache", "r")
-    #print(locationFile.read(), file=sys.stderr)
     data = json.loads(locationFile.read())
     locationFile.close()
     return data
-    
+
+
 def request_location_info(nodes):
     data = fetch_data()
     nodePath = []
     for i in nodes:
-        nName = data[i.buildingNumber]["title"]
+        # bnName = data[i.buildingNumber]["title"]
         nLat = data[i.buildingNumber]["latitude"]
         nLong = data[i.buildingNumber]["longitude"]
         nodePath.append({
-        "lat": nLat,
-        "lng": nLong
+            "lat": nLat,
+            "lng": nLong
         })
 
     return nodePath
+
 
 def display_map():
     classNums = request.form.getlist('buildingNumber[]')
@@ -61,13 +66,15 @@ def display_map():
             continue
         classes.append(Class(classNames[i], classNums[i]))
     nodes = request_location_info(classes)
-    return render_template('map.html', nodes=nodes) 
+    return render_template('map.html', nodes=nodes)
+
 
 def get_path_info():
-    numList = [];
+    numList = []
     for i in fetch_data():
         numList.append(i)
-    return render_template('index.html', bList=numList) 
+    return render_template('index.html', bList=numList)
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -79,5 +86,4 @@ def home():
         return "This shouldn't happen"
 
 if __name__ == "__main__":
-    
-    app.run(debug=True)
+    app.run(debug=False)
