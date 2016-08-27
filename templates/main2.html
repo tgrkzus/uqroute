@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UQRoute</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        function myCreateFunction() {
+            var table = document.getElementById("myTable");
+            var rowCount = $('#myTable tr').length;
+            var row = table.insertRow(rowCount);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = "<input type='text' name='buildingnumber' placeholder='Building Number'>";
+            cell2.innerHTML = "<input type='text' name='class' placeholder='Class Name'>";
+        }
+        function myDeleteFunction() {
+            var rowCount = $('#myTable tr').length;
+            if (rowCount != 1) {
+            document.getElementById("myTable").deleteRow(rowCount-1);
+            }
+        }
+    </script>
+
+        <style>
+        body {
+            margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+        }
+        .img-center {
+            margin: 0 auto;
+        }
+        section {
+            padding: 75px 0;
+        }
+        .section-heading {
+            margin: 30px 0;
+            font-size: 4em;
+        }
+        .section-lead {
+            margin: 30px 0;
+        }
+        .section-paragraph {
+            margin: 30px 0;
+        }
+            @media (min-width: 768px) {
+        }
+        .centalign {
+            margin: auto;
+        }
+        input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content Section -->
+    <section>
+        <div class="container" id = "cont">
+            <div class="row">
+                <img class="img-responsive img-center" src="LOGO.png" alt=""  width="400" height="400">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="lead section-lead"><center>A handy tool aimed to optimize your path around campus.</p></center>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form id='classes'>
+                        <table id="myTable" class="table">
+                            <tr>
+                                <td>Building Number</td>
+                                <td>Class</td>
+                            </tr>
+                            <tr>
+                                <td><input type='text' name='buildingnumber' placeholder='Building Number'></td>
+                                <td><input type='test' name='class' placeholder='Class Name'></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <button class='btn btn-success' onclick="myCreateFunction()">Add Class</button>
+                    <button class='btn btn-danger' onclick="myDeleteFunction()">Remove Class</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <form>
+                        <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap Core JavaScript -->
+    
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

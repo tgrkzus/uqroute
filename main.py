@@ -78,7 +78,7 @@ def home():
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    return render_template ('main.html')
+    return render_template ('main2.html')
 
 @app.route('/index', methods=['GET', 'POST'])
 def index():
