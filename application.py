@@ -64,7 +64,10 @@ def display_map():
     return render_template('map.html', nodes=nodes) 
 
 def get_path_info():
-    return render_template('index.html') 
+    numList = [];
+    for i in fetch_data():
+        numList.append(i)
+    return render_template('index.html', bList=numList) 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():

@@ -64,6 +64,11 @@
 </head>
 <body>
     <!-- Content Section -->
+    <datalist id="numList">
+	{% for i in bList %}
+	    <option value={{i}}>{{i}}</option>
+	{% endfor %}
+    </datalist>
     <section>
         <div class="container" id = "cont">
             <div class="row">
@@ -83,7 +88,7 @@
                                 <td>Class</td>
                             </tr>
                             <tr>
-                                <td><input type='text' name='buildingNumber[]' placeholder='Building Number'></td>
+                                <td><input type='text' autocomplete="off" list="numList" name='buildingNumber[]' placeholder='Building Number'></td>
                                 <td><input type='test' name='class[]' placeholder='Class Name'></td>
                             </tr>
                         </table>
