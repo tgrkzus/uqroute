@@ -1,7 +1,7 @@
 import os.path, requests, json, sys
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, jsonify, render_template
 app = Flask(__name__)
-
+app.debug = True
 class Class(object):
     def __init__(self, name, buildingNumber):
         self.name = name
@@ -43,33 +43,29 @@ def request_location_info(nodes):
     nodePath = []
     for i in nodes:
         nName = data[i.buildingNumber]["title"]
-        nLat = str(data[i.buildingNumber]["latitude"])
-        nLong = str(data[i.buildingNumber]["longitude"])
-        nodePath.append([nName, nLat, nLong])
-    # Generate node url
-    url = "https://www.google.com.au/maps/dir"
-    for i in nodePath:
-        url += "/" + i[1] + "," + i[2]
+        nLat = data[i.buildingNumber]["latitude"]
+        nLong = data[i.buildingNumber]["longitude"]
+        nodePath.append({
+        "lat": nLat,
+        "lng": nLong
+        })
 
-    return redirect(url)
+    return nodePath
 
 def display_map():
     classes = []
     classes.append(Class("Class 1 - Forgen Smith", "1"))
+    classes.append(Class("Class 1 - Forgen Smith", "3"))
+    classes.append(Class("Class 1 - Forgen Smith", "5"))
     classes.append(Class("Class 2 - Hawken", "50"))
-
-    return request_location_info(classes)
+    classes.append(Class("Class 2 - Hawken", "69"))
+    classes.append(Class("Class 2 - Hawken", "23"))
+    
+    nodes = request_location_info(classes)
+    return render_template('map.html', nodes=nodes) 
 
 def get_path_info():
-    return '''
-            <form action="" method="post">
-            <input type="text" name="Course">
-            <input type="text" name="Building">
-            <input type="text" name="Time">
-            <br>
-            <input type="submit" value=Select>
-            </form>
-        ''' 
+    return render_template('home.html') 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
