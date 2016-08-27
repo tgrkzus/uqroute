@@ -65,7 +65,7 @@ def display_map():
     return render_template('map.html', nodes=nodes) 
 
 def get_path_info():
-    return render_template('home.html') 
+    return render_template('index.html') 
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -75,14 +75,6 @@ def home():
         return display_map()
     else:
         return "This shouldn't happen"
-
-@app.route('/main', methods=['GET', 'POST'])
-def main():
-    return render_template ('main2.html')
-
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html')
 
 if __name__ == "__main__":
     

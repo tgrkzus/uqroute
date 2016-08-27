@@ -12,7 +12,7 @@
     <title>UQRoute</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
         function myCreateFunction() {
@@ -67,7 +67,7 @@
     <section>
         <div class="container" id = "cont">
             <div class="row">
-                <img class="img-responsive img-center" src="LOGO.png" alt=""  width="400" height="400">
+                <img class="img-responsive img-center" src="{{url_for('static', filename='LOGO.png')}}" alt=""  width="400" height="400">
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -110,6 +110,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
 </body>
 </html>
