@@ -1,5 +1,5 @@
 import os.path, requests, json, sys
-from flask import Flask, request
+from flask import Flask, request, redirect
 app = Flask(__name__)
 
 class Class(object):
@@ -38,15 +38,27 @@ def fetch_data():
     locationFile.close()
     return data
     
-def request_location_info(latitude, longitude):
+def request_location_info(nodes):
     data = fetch_data()
-    return data
+    nodePath = []
+    for i in nodes:
+        nName = data[i.buildingNumber]["title"]
+        nLat = str(data[i.buildingNumber]["latitude"])
+        nLong = str(data[i.buildingNumber]["longitude"])
+        nodePath.append([nName, nLat, nLong])
+    # Generate node url
+    url = "https://www.google.com.au/maps/dir"
+    for i in nodePath:
+        url += "/" + i[1] + "," + i[2]
+
+    return redirect(url)
 
 def display_map():
-    class1 = Class("Class 1 - Forgen Smith", 1)
-    class2 = Class("Class 2 - Hawken", 50)
+    classes = []
+    classes.append(Class("Class 1 - Forgen Smith", "1"))
+    classes.append(Class("Class 2 - Hawken", "50"))
 
-    return request_location_info(0, 0)["58A"]["title"]
+    return request_location_info(classes)
 
 def get_path_info():
     return '''
