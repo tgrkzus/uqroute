@@ -2,7 +2,7 @@ import os.path
 import requests
 import json
 from flask import Flask, request, render_template
-app = Flask(__name__)
+application = Flask(__name__)
 
 
 class Class(object):
@@ -76,7 +76,7 @@ def get_path_info():
     return render_template('index.html', bList=numList)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'GET':
         return get_path_info()
@@ -86,4 +86,4 @@ def home():
         return "This shouldn't happen"
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    application.run(debug=False)
