@@ -53,14 +53,13 @@ def request_location_info(nodes):
     return nodePath
 
 def display_map():
+    classNums = request.form.getlist('buildingNumber[]')
+    classNames = request.form.getlist('class[]')
     classes = []
-    classes.append(Class("Class 1 - Forgen Smith", "1"))
-    classes.append(Class("Class 1 - Forgen Smith", "3"))
-    classes.append(Class("Class 1 - Forgen Smith", "5"))
-    classes.append(Class("Class 2 - Hawken", "50"))
-    classes.append(Class("Class 2 - Hawken", "69"))
-    classes.append(Class("Class 2 - Hawken", "23"))
-    
+    for i in range(0, len(classNums)):
+        if classNums[i] == '' or classNames[i] == '':
+            continue
+        classes.append(Class(classNames[i], classNums[i]))
     nodes = request_location_info(classes)
     return render_template('map.html', nodes=nodes) 
 

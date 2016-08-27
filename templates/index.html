@@ -16,18 +16,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
         function myCreateFunction() {
-            var table = document.getElementById("myTable");
-            var rowCount = $('#myTable tr').length;
+            var table = document.getElementById("classTable");
+            var rowCount = $('#classTable tr').length;
             var row = table.insertRow(rowCount);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
-            cell1.innerHTML = "<input type='text' name='buildingnumber' placeholder='Building Number'>";
-            cell2.innerHTML = "<input type='text' name='class' placeholder='Class Name'>";
+            cell1.innerHTML = "<input type='text' name='buildingNumber[]' placeholder='Building Number'>";
+            cell2.innerHTML = "<input type='text' name='class[]' placeholder='Class Name'>";
         }
         function myDeleteFunction() {
-            var rowCount = $('#myTable tr').length;
+            var rowCount = $('#classTable tr').length;
             if (rowCount != 1) {
-            document.getElementById("myTable").deleteRow(rowCount-1);
+            document.getElementById("classTable").deleteRow(rowCount-1);
             }
         }
     </script>
@@ -76,31 +76,29 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <form id='classes'>
-                        <table id="myTable" class="table">
+                    <form id='classes' method='post'>
+                        <table id="classTable" class="table">
                             <tr>
                                 <td>Building Number</td>
                                 <td>Class</td>
                             </tr>
                             <tr>
-                                <td><input type='text' name='buildingnumber' placeholder='Building Number'></td>
-                                <td><input type='test' name='class' placeholder='Class Name'></td>
+                                <td><input type='text' name='buildingNumber[]' placeholder='Building Number'></td>
+                                <td><input type='test' name='class[]' placeholder='Class Name'></td>
                             </tr>
                         </table>
-                    </form>
                 </div>
             </div>
             </br>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <button class='btn btn-success' onclick="myCreateFunction()">Add Class</button>
-                    <button class='btn btn-danger' onclick="myDeleteFunction()">Remove Class</button>
+                    <button type="button" class='btn btn-success' onclick="myCreateFunction()">Add Class</button>
+                    <button type="button" class='btn btn-danger' onclick="myDeleteFunction()">Remove Class</button>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <form>
                         <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
                     </form>
                 </div>
