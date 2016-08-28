@@ -22,7 +22,7 @@
     <section>
         <div class="container" id = "cont">
             <div class="row centalign">
-                <img class="img-responsive img-center" src="static/LOGO.png" alt="" width="200" height="200">
+                <img class="img-responsive img-center" src="static/LOGO.png" alt="" width="400" height="400">
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -32,6 +32,7 @@
             </div>
         </div>
     </section>
+	<div id="distance"></div>
    	<div id="map"></div>
     <script>
       function initMap() {
@@ -73,8 +74,16 @@
 	directionsDisplay.setMap(map);
 	
 	directionsService.route(directionRequest, function(result, status) {
-		if (status == 'OK') {
+		if (status == "OK") {
 			directionsDisplay.setDirections(result);
+			var distance = 0;                         
+			var legs = result.routes[0].legs;
+			for (var i = 0; i < legs.length; i++) {
+				distance += legs[i].distance.value;
+			}
+			var calories = distance / 1000 * 70;
+			document.getElementById("distance").innerHTML = calories;
+
 		}
       });
 }

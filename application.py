@@ -46,10 +46,11 @@ def request_location_info(nodes):
     data = fetch_data()
     nodePath = []
     for i in nodes:
-        # bnName = data[i.buildingNumber]["title"]
+        bnName = data[i.buildingNumber]["title"]
         nLat = data[i.buildingNumber]["latitude"]
         nLong = data[i.buildingNumber]["longitude"]
         nodePath.append({
+            "title": bnName,
             "lat": nLat,
             "lng": nLong
         })
