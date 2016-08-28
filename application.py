@@ -1,7 +1,7 @@
 import os.path
 import requests
 import json
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 application = Flask(__name__)
 
 
@@ -58,6 +58,7 @@ def request_location_info(nodes):
     return nodePath
 
 
+@application.route('/map', methods=['GET', 'POST'])
 def display_map():
     classNums = request.form.getlist('buildingNumber[]')
     classNames = request.form.getlist('class[]')
@@ -84,7 +85,7 @@ def home():
     if request.method == 'GET':
         return get_path_info()
     elif request.method == 'POST':
-        return display_map()
+        return redirect(url_for('display_map'), code=307)
     else:
         return "This shouldn't happen"
 
