@@ -66,6 +66,8 @@ def display_map():
             continue
         classes.append(Class(classNames[i], classNums[i]))
     nodes = request_location_info(classes)
+    if len(nodes) == 0:
+        return render_template('failure.html')
     return render_template('map.html', nodes=nodes)
 
 
