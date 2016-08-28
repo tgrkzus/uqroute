@@ -1,8 +1,8 @@
-# Uq Route
+# UQ Route
 
 [Website](http://uqroute.com)
 
-Uq Route is a simple web service that from a list of user inputted building (in sequential order),
+UQ Route is a simple web service that from a list of user inputted building (in sequential order),
 
 generates a path around UQ using Google Maps API to generate the map and path.
 
