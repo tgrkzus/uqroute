@@ -30,6 +30,9 @@
 			.blue {
 					color: #0072bb;
 				}
+			.onehundred {
+				width: 100%;
+			}
     	</style>
   	</head>
   	<body>
@@ -44,9 +47,15 @@
                     <p class="lead section-lead"><center>After some serious number crunching, we found the best route for you. <br/> Here's what we recommend...</p></center>
                 </div>
             </div>
-        </div>
+			<div class="row">
+				<div id="map"></div>
+			</div>
+			<br>
+        	<div class="row centalign onehundred">
+				<p>Your total walking distance is <span id="distance">0</span>m. That's the equivalent of about <span id=calories>0</span> calories.</p>
+			<div>
+		</div>
     </section>
-   	<div id="map"></div>
     <script>
       function initMap() {
         var mapDiv = document.getElementById('map');
