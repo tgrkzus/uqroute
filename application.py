@@ -58,6 +58,11 @@ def request_location_info(nodes):
     return nodePath
 
 
+@application.route('/findroute')
+def gps_route():
+    render_template('findroute.html')
+
+
 @application.route('/map', methods=['GET', 'POST'])
 def display_map():
     classNums = request.form.getlist('buildingNumber[]')
