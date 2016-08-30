@@ -16,6 +16,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
         <link rel="stylesheet" href="static/js/leaflet.routing.mapzen.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.css" />
 
 
         <style>
@@ -95,9 +97,10 @@
         <script src="static/js/gps_path.js"></script>
         <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
         <script src="static/js/leaflet-routing-machine.js"></script>
-        <script src="static/js/lrm-mapzen.js"></script>
+        <script src="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
         <script>
-        $('.input').on('submit', function () {
+        $('.input').on('submit', function (e) {
+            e.preventDefault();
             var inp = document.getElementById('location').value;
             createMap(inp);
         });

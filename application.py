@@ -60,7 +60,7 @@ def request_location_info(nodes):
 
 @application.route('/findroute')
 def gps_route():
-    render_template('findroute.html')
+    return render_template('findroute.html')
 
 
 @application.route('/map', methods=['GET', 'POST'])
