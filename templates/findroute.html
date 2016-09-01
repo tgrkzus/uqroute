@@ -20,76 +20,24 @@
         <link rel="stylesheet" href="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.css" />
 
 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
         <style>
 * {
     color: #0072bb;
 }
-                        html {
-                            position: relative;
-                            min-height: 100%;
-                        }
-
                         body {
-                            margin-bottom: 25px;
+                            padding: 0;
+                            margin: 0;
                         }
-                        #map {
+                        html, body, #map {
                             width: 100%;
-                            height: 400px;
-                        }
-                        .centalign {
-                            text-align: center;
-                        }
-                        .centalign img {
-                            margin: 0 auto;
-                        }
-                        .footer {
-                            position: absolute;
-                            bottom: 0;
-                            width: 100%;
-                            /* Set the fixed height of the footer here */
-                            height: 25px;
-                            text-align: center;
-                        }
-                        .footer a {
-                            text-decoration: none;
-                        }
-                        .blue {
-                            color: #0072bb;
-                            font-size: 20px;
-                        }
-                        .onehundred {
-                            width: 100%;
-                        }
-                        .results {
-                            font-size: 40px;
+                            height: 100%;
                         }
         </style>
     </head>
     <body>
-        <datalist id="locList">
-            <option value="One">
-            <option value="Two">
-            <option value="Three">
-        </datalist>
-        <section>
-            <div class="container" id = "cont">
-                <div class="row">
-                    <div class="col-xs-12 onehundred">
-                        <form class="input">
-                            <input name="building"
-                                   id="location"
-                                   type="text"
-                                   placeholder="Enter a location"
-                                   autocomplete="off"
-                                   value=""
-                                   list="locList">
-                            <input type="Submit" value="Submit">
-                        </form>
-                        <div id="map"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div id="map"></div>
     </body>
     <footer class="footer">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -100,6 +48,7 @@
         <script src="https://domoritz.github.io/leaflet-locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
         <script src="static/js/lrm-mapzen.js"></script>
         <script>
+        document.onload= createMap();
         $('.input').on('submit', function (e) {
             e.preventDefault();
             var inp = document.getElementById('location').value;
@@ -108,9 +57,5 @@
             }
         });
         </script>
-        <div class="container center blue">
-            <p>Created by <a href="https://github.com/tgrkzus">Tom Richardson</a>, <a href="https://au.linkedin.com/in/lachlan-jensen-6456b9117">Lachlan Jensen</a> & <a href="https://au.linkedin.com/in/nicholas-d-lambourne-07b782a2">Nicholas Lambourne</a></p>
-            <p></p>Not affiliated with UQ</p>
-        </div>
     </footer>
 </html>
