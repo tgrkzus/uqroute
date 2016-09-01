@@ -2,7 +2,8 @@ function createMap(input) {
     // Decode input:
     
 
-    var node = L.latLng(-27.4989042, 153.0131141);
+    var node = [];
+    node.push(L.latLng(-27.4980000, 153.0131141))
 
     var map = L.map('map').setView([-27.4989042, 153.0131141], 13);
 
@@ -15,26 +16,40 @@ function createMap(input) {
             accessToken: 'pk.eyJ1IjoidGdya3p1cyIsImEiOiJjaXNlbjZkaHowMGI4MnlydDk0cTI1aXZxIn0.baEJ-39wtc9AkyxDebjQHQ'
             }).addTo(map);
 
-        var prevLayer = {}
-	map.locate({setView: true, watch: true})
-        .on('locationfound', function(e){
-            var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
 
-            map.removeLayer(prevLayer);
-            map.addLayer(marker);
-            prevLayer = marker;
+    var control = {};
+    var prevLayer = {};
+    map.locate({setView: false, watch: true})
+        .on('locationfound', function(e){
+            var marker = L.marker([e.latitude, e.longitude]).bindPopup('User location');
+
+
+        map.removeLayer(prevLayer);
+        map.addLayer(marker);
+        prevLayer = marker;
+
+
+        if (node.length == 2) {
+            node.pop();
+            node.push(L.latLng(e.latitude, e.longitude));
+        } else {
+            node.push(L.latLng(e.latitude, e.longitude));
+        }
+
+        control.setWaypoints(node);
+        control.route();
         })
-       .on('locationerror', function(e){
-            console.log(e);
-            alert("Location access denied.");
-        });       
+    .on('locationerror', function(e){
+        console.log(e);
+        alert("Location access denied.");
+    });       
 
     var router = L.Routing.mapzen('valhalla-KAduFrX', {costing:"pedestrian"});
-    var control = L.Routing.control({
+    control = L.Routing.control({
         router: router,
         formatter: new L.Routing.mapzenFormatter(),
-        waypoints: node
-    }).addTo(map);
+    });
+    control.addTo(map);
 
     //var distance = 0;
     //router.route(control.getWaypoints(), function(err, routes) {
