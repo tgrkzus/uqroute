@@ -1,9 +1,10 @@
+var control = {};
+var target  = {};
+
 function createMap(input) {
     // Decode input:
-    
 
-    var node = [];
-    node.push(L.latLng(-27.4980000, 153.0131141))
+    target = L.latLng(-27.4980000, 153.0131141);
 
     var map = L.map('map').setView([-27.4989042, 153.0131141], 13);
 
@@ -23,21 +24,11 @@ function createMap(input) {
         .on('locationfound', function(e){
             var marker = L.marker([e.latitude, e.longitude]).bindPopup('User location');
 
-
         map.removeLayer(prevLayer);
         map.addLayer(marker);
         prevLayer = marker;
 
-
-        if (node.length == 2) {
-            node.pop();
-            node.push(L.latLng(e.latitude, e.longitude));
-        } else {
-            node.push(L.latLng(e.latitude, e.longitude));
-        }
-
-        control.setWaypoints(node);
-        control.route();
+        repath(L.latLng(e.latitude, e.longitude));
         })
     .on('locationerror', function(e){
         console.log(e);
@@ -64,4 +55,10 @@ function createMap(input) {
     //    L.marker(nodes[i]).addTo(map);
     //}
 
+}
+
+
+function repath(loc) {
+    control.setWaypoints([loc, target]);
+    control.route();
 }
