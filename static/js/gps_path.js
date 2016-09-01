@@ -41,7 +41,6 @@ function createMap(input) {
         })
     .on('locationerror', function(e){
         console.log(e);
-        alert("Location access denied.");
     });       
 
     var router = L.Routing.mapzen('valhalla-KAduFrX', {costing:"pedestrian"});
