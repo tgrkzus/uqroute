@@ -2,7 +2,7 @@ var control = {};
 var target  = {};
 var prevLayer = {};
 
-function createMap(input) {
+function createMap() {
     // Decode input:
     target = L.latLng(-27.4980000, 153.0131141);
     var map = L.map('map').setView([-27.4989042, 153.0131141], 13);
@@ -18,8 +18,18 @@ function createMap(input) {
         location_found(e, map);
     });
     get_geolocation(map);
-    setInterval(get_geolocation, 3000, map)
+    //setInterval(get_geolocation, 3000, map)
 
+    // Create invisible search layer with geolocations for each building
+    var searchLayer = L.layerGroup([
+            L.marker([-27.4980000, 153.0131141], {title: "One"}),
+            L.marker([-27.0000000, 153.0000000], {title: "Two"})]);
+                
+    map.addControl(new L.Control.Search({layer: searchLayer, moveToLocation: function (latlng) {
+        set_target(latlng);
+    }
+    }));
+    
     var router = L.Routing.mapzen('valhalla-KAduFrX', {costing:"pedestrian"});
     control = L.Routing.control({
         router: router,
@@ -29,7 +39,7 @@ function createMap(input) {
 }
 
 function get_geolocation(map) {
-    map.locate();
+    map.locate({watch: true});
 }
 
 function location_found(e, map) {
@@ -40,6 +50,10 @@ function location_found(e, map) {
     prevLayer = marker;
 
     repath(L.latLng(e.latitude, e.longitude));
+}
+
+function set_target(loc) {
+    target = loc;
 }
 
 function repath(loc) {
