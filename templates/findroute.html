@@ -102,7 +102,9 @@
         $('.input').on('submit', function (e) {
             e.preventDefault();
             var inp = document.getElementById('location').value;
-            createMap(inp);
+            if( $('#map').is(':empty') ) {
+                createMap(inp);
+            }
         });
         </script>
         <div class="container center blue">

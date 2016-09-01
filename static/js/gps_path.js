@@ -15,17 +15,14 @@ function createMap(input) {
             accessToken: 'pk.eyJ1IjoidGdya3p1cyIsImEiOiJjaXNlbjZkaHowMGI4MnlydDk0cTI1aXZxIn0.baEJ-39wtc9AkyxDebjQHQ'
             }).addTo(map);
 
+        var prevLayer = {}
 	map.locate({setView: true, watch: true})
         .on('locationfound', function(e){
             var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
-            var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
-                weight: 1,
-                color: 'blue',
-                fillColor: '#cacaca',
-                fillOpacity: 0.2
-            });
+
+            map.removeLayer(prevLayer);
             map.addLayer(marker);
-            map.addLayer(circle);
+            prevLayer = marker;
         })
        .on('locationerror', function(e){
             console.log(e);
