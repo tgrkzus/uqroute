@@ -1,7 +1,7 @@
 import os.path
 import requests
 import json
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, jsonify
 application = Flask(__name__)
 
 
@@ -56,6 +56,12 @@ def request_location_info(nodes):
         })
 
     return nodePath
+
+
+@application.route('/get_locations')
+def get_locations():
+    data = fetch_data()
+    return jsonify(result=data)
 
 
 @application.route('/findroute')

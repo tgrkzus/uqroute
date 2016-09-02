@@ -1,4 +1,7 @@
 var control = {};
+var tempLayer = L.layerGroup([
+                            L.marker([-27.4980000, 153.0131141], {title: "One", opacity: 0})]);
+var searchControl = {};
 var target  = {};
 var prevLayer = {};
 
@@ -21,14 +24,12 @@ function createMap() {
     //setInterval(get_geolocation, 3000, map)
 
     // Create invisible search layer with geolocations for each building
-    var searchLayer = L.layerGroup([
-            L.marker([-27.4980000, 153.0131141], {title: "One"}),
-            L.marker([-27.0000000, 153.0000000], {title: "Two"})]);
-                
-    map.addControl(new L.Control.Search({layer: searchLayer, moveToLocation: function (latlng) {
+    searchControl = new L.Control.Search({ layer: tempLayer, moveToLocation: function (latlng) {
         set_target(latlng);
-    }
-    }));
+    }});
+    map.addControl(searchControl);    
+    get_locations();
+
     
     var router = L.Routing.mapzen('valhalla-KAduFrX', {costing:"pedestrian"});
     control = L.Routing.control({
@@ -36,6 +37,20 @@ function createMap() {
         formatter: new L.Routing.mapzenFormatter(),
     });
     control.addTo(map);
+}
+
+function get_locations() {
+    $.getJSON($SCRIPT_ROOT + '/get_locations', {}, function(data) {
+        var searchLayer = L.layerGroup();
+    
+        for (var key in data.result) {
+            searchLayer.addLayer(L.marker([
+                    data.result[key]["latitude"],
+                    data.result[key]["longitude"]],
+                    { title: data.result[key]["title"], opacity: 0 }));
+        }
+        searchControl.setLayer(searchLayer);
+    });
 }
 
 function get_geolocation(map) {
