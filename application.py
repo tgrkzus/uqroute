@@ -41,64 +41,15 @@ def fetch_data():
     locationFile.close()
     return data
 
-
-def request_location_info(nodes):
-    data = fetch_data()
-    nodePath = []
-    for i in nodes:
-        bnName = data[i.buildingNumber]["title"]
-        nLat = data[i.buildingNumber]["latitude"]
-        nLong = data[i.buildingNumber]["longitude"]
-        nodePath.append({
-            "title": bnName,
-            "lat": nLat,
-            "lng": nLong
-        })
-
-    return nodePath
-
-
 @application.route('/get_locations')
 def get_locations():
     data = fetch_data()
     return jsonify(result=data)
 
 
-@application.route('/findroute')
+@application.route('/')
 def gps_route():
     return render_template('findroute.html')
-
-
-@application.route('/map', methods=['GET', 'POST'])
-def display_map():
-    classNums = request.form.getlist('buildingNumber[]')
-    classNames = request.form.getlist('class[]')
-    classes = []
-    for i in range(0, len(classNums)):
-        if classNums[i] == '' or classNames[i] == '':
-            continue
-        classes.append(Class(classNames[i], classNums[i]))
-    nodes = request_location_info(classes)
-    if len(nodes) == 0:
-        return render_template('failure.html')
-    return render_template('map.html', nodes=nodes)
-
-
-def get_path_info():
-    numList = []
-    for i in fetch_data():
-        numList.append(i)
-    return render_template('index.html', bList=numList)
-
-
-@application.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'GET':
-        return get_path_info()
-    elif request.method == 'POST':
-        return redirect(url_for('display_map'), code=307)
-    else:
-        return "This shouldn't happen"
 
 if __name__ == "__main__":
     application.run(debug=False, host='0.0.0.0')
