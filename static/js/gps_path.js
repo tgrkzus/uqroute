@@ -21,8 +21,8 @@ function createMap() {
     map.on('locationfound', function(e) {
         location_found(e, map);
     });
-    //get_geolocation(map);
-    setInterval(get_geolocation, 2000, map)
+    get_geolocation(map);
+    //setInterval(get_geolocation, 2000, map)
 
     // Create invisible search layer with geolocations for each building
     searchControl = new L.Control.Search({ layer: tempLayer, moveToLocation: function (latlng) {
@@ -55,7 +55,7 @@ function get_locations() {
 }
 
 function get_geolocation(map) {
-    map.locate();
+    map.locate({watch: true});
 }
 
 function location_found(e, map) {
