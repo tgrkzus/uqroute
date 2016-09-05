@@ -10,7 +10,8 @@ var oldWaypoints = {};
 function createMap() {
     // Decode input:
     target = L.latLng(-27.4980000, 153.0131141);
-    var map = L.map('map').setView([-27.4989042, 153.0131141], 13);
+    var map = L.map('map', {zoomControl: false}).setView([-27.4989042, 153.0131141], 13);
+    L.control.zoom({position:'topright'}).addTo(map);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
             maxZoom: 18,
@@ -55,7 +56,7 @@ function get_locations() {
 }
 
 function get_geolocation(map) {
-    map.locate({watch: true});
+    map.locate({watch: true, enableHighAccuracy: true});
 }
 
 function location_found(e, map) {

@@ -39,7 +39,8 @@
 	background: #fff;
 	border:1px solid #666;
 	border-radius:2px;
-	height:18px;
+	height:30px;
+        width:500px;
 	padding:0 18px 0 2px;
 	margin:3px 0 3px 3px;
 }
@@ -112,6 +113,7 @@
 	text-decoration:none;	
 	white-space:nowrap;
 	vertical-align:center;
+        font-size:2em
 }
 .leaflet-control-search .search-button:hover {
 	background-color: #f4f4f4;
