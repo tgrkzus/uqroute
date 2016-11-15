@@ -1,7 +1,5 @@
 # UQ Route
 
-[Website](https://uqroute.com)
-
 UQ Route is a simple web service created with Flask to provide pathing around UQ, right now the web application generates a path around UQ using OpenSourceMaps, using libraries/APIs leafletjs, Mapbox, leaflet-routing-machine and Mapzen. This project was originally created at [UQCS Hackathon 2016](https://uqcs.org.au/).
 
 # Future Features
